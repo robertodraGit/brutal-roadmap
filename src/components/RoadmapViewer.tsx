@@ -65,6 +65,35 @@ const RoadmapViewer = () => {
     }
   }, [roadmapItems]);
 
+  // Add scroll animation observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('card-visible');
+          }
+        });
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -10% 0px'
+      }
+    );
+    
+    // Get all card elements
+    const cards = document.querySelectorAll('.roadmap-card');
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+    
+    return () => {
+      cards.forEach(card => {
+        observer.unobserve(card);
+      });
+    };
+  }, [roadmapItems, filter]);
+
   const handleAddItem = (item: Omit<RoadmapItemProps, 'id' | 'onUpdate' | 'onDelete'>) => {
     const newItem = {
       ...item,
@@ -103,12 +132,12 @@ const RoadmapViewer = () => {
   return (
     <div className="min-h-screen">
       <div className="relative snap-section h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display uppercase font-black text-foreground max-w-4xl leading-none">
+        <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-display uppercase font-black text-foreground max-w-4xl leading-none">
           <span className="inline-block animate-fade-in">PROJECT</span>
           <br />
           <span className="text-primary inline-block animate-fade-in delay-100">ROADMAP</span>
         </h1>
-        <p className="mt-8 text-lg md:text-xl max-w-lg animate-fade-in delay-200">
+        <p className="mt-8 text-xl md:text-2xl max-w-lg animate-fade-in delay-200">
           Scroll down to explore our project timeline and upcoming milestones. All items are editable - just click to modify.
         </p>
         <div className="absolute bottom-8 animate-bounce">
@@ -117,10 +146,10 @@ const RoadmapViewer = () => {
       </div>
 
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-12 snap-section">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="roadmap-title mb-8">Projects Roadmap</h2>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="roadmap-title mb-12">Projects Roadmap</h2>
           
-          <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
+          <div className="flex justify-between items-center mb-12 flex-wrap gap-4">
             <NewRoadmapItemForm onAdd={handleAddItem} />
             
             <div className="flex gap-2 flex-wrap">
@@ -165,13 +194,13 @@ const RoadmapViewer = () => {
           
           <div 
             ref={itemsRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
           >
             {filteredItems.map((item, index) => (
               <div 
                 key={item.id}
-                className={`fade-in-up opacity-0`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="roadmap-card opacity-0 translate-y-12"
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
                 <RoadmapItem 
                   {...item}
@@ -183,7 +212,7 @@ const RoadmapViewer = () => {
             
             {filteredItems.length === 0 && (
               <div className="col-span-full text-center py-16">
-                <p className="text-xl text-muted-foreground">No projects found for this filter.</p>
+                <p className="text-2xl text-muted-foreground">No projects found for this filter.</p>
               </div>
             )}
           </div>

@@ -87,7 +87,7 @@
   }
 
   .roadmap-item {
-    @apply bg-secondary hover:bg-secondary/80 transition-all duration-300 border border-border p-6 rounded-sm;
+    @apply bg-secondary hover:bg-secondary/80 transition-all duration-300 border border-border p-8 rounded-sm;
   }
 
   .roadmap-item-active {
@@ -95,15 +95,15 @@
   }
 
   .roadmap-title {
-    @apply text-5xl md:text-7xl font-display uppercase font-black tracking-tight text-foreground border-b-4 border-primary pb-2 mb-8 inline-block;
+    @apply text-7xl md:text-8xl lg:text-9xl font-display uppercase font-black tracking-tight text-foreground border-b-4 border-primary pb-3 mb-12 inline-block;
   }
 
   .brutalist-button {
-    @apply bg-primary hover:bg-primary/80 text-foreground font-bold border-2 border-foreground py-2 px-4 uppercase tracking-wider transition-all duration-150 shadow-[4px_4px_0px_0px_rgba(241,233,218,0.5)];
+    @apply bg-primary hover:bg-primary/80 text-foreground font-bold border-2 border-foreground py-3 px-6 uppercase tracking-wider transition-all duration-150 shadow-[4px_4px_0px_0px_rgba(241,233,218,0.5)] text-lg;
   }
 
   .brutalist-input {
-    @apply bg-background border-2 border-foreground text-foreground px-4 py-2 w-full font-mono outline-none focus:ring-2 focus:ring-primary;
+    @apply bg-background border-2 border-foreground text-foreground px-4 py-3 w-full font-mono outline-none focus:ring-2 focus:ring-primary;
   }
 }
 
@@ -132,4 +132,23 @@
   scroll-snap-align: start;
   height: auto;
   min-height: 100vh;
+}
+
+/* Card animation on scroll */
+.roadmap-card {
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.card-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roadmap-card {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
