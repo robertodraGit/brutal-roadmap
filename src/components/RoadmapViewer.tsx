@@ -4,38 +4,7 @@ import RoadmapItem, { RoadmapItemProps } from './RoadmapItem';
 import NewRoadmapItemForm from './NewRoadmapItemForm';
 import { cn } from '@/lib/utils';
 import { toast } from "@/components/ui/sonner";
-
-// Sample initial data
-const initialRoadmapItems: Array<Omit<RoadmapItemProps, 'onUpdate' | 'onDelete'>> = [
-  {
-    id: '1',
-    title: 'Project Concept',
-    description: 'Initial brainstorming and concept development for our flagship product.',
-    date: '2025-01-15',
-    status: 'completed'
-  },
-  {
-    id: '2',
-    title: 'Design System',
-    description: 'Create a comprehensive design system for consistent branding across all platforms.',
-    date: '2025-02-20',
-    status: 'in-progress'
-  },
-  {
-    id: '3',
-    title: 'Frontend Architecture',
-    description: 'Develop scalable frontend architecture with modern frameworks and state management.',
-    date: '2025-03-15',
-    status: 'planned'
-  },
-  {
-    id: '4',
-    title: 'Beta Launch',
-    description: 'Release beta version to select users for initial feedback and testing.',
-    date: '2025-05-10',
-    status: 'planned'
-  }
-];
+import { initialRoadmapItems } from '@/utils/items';
 
 const RoadmapViewer = () => {
   const [roadmapItems, setRoadmapItems] = useState<Array<Omit<RoadmapItemProps, 'onUpdate' | 'onDelete'>>>([]);
@@ -132,13 +101,13 @@ const RoadmapViewer = () => {
   return (
     <div className="min-h-screen">
       <div className="relative snap-section h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
-        <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-display uppercase font-black text-foreground max-w-4xl leading-none">
-          <span className="inline-block animate-fade-in">PROJECT</span>
+        <h1 className="text-6xl md:text-9xl lg:text-[10rem] font-display uppercase font-black text-foreground max-w-4xl leading-none">
+          <span className="inline-block animate-fade-in">TideScript</span>
           <br />
           <span className="text-primary inline-block animate-fade-in delay-100">ROADMAP</span>
         </h1>
         <p className="mt-8 text-xl md:text-2xl max-w-lg animate-fade-in delay-200">
-          Scroll down to explore our project timeline and upcoming milestones. All items are editable - just click to modify.
+          Scroll down to explore our project timeline and upcoming milestones.
         </p>
         <div className="absolute bottom-8 animate-bounce">
           <div className="text-primary text-4xl">↓</div>
@@ -147,7 +116,7 @@ const RoadmapViewer = () => {
 
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-12 snap-section">
         <div className="max-w-7xl mx-auto">
-          <h2 className="roadmap-title mb-12">Projects Roadmap</h2>
+          <h2 className="roadmap-title mb-12">Roadmap</h2>
           
           <div className="flex justify-between items-center mb-12 flex-wrap gap-4">
             <NewRoadmapItemForm onAdd={handleAddItem} />
@@ -212,7 +181,7 @@ const RoadmapViewer = () => {
             
             {filteredItems.length === 0 && (
               <div className="col-span-full text-center py-16">
-                <p className="text-2xl text-muted-foreground">No projects found for this filter.</p>
+                <p className="text-2xl text-muted-foreground">No tasks found for this filter.</p>
               </div>
             )}
           </div>

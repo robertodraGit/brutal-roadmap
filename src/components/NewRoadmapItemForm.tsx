@@ -52,7 +52,7 @@ const NewRoadmapItemForm = ({ onAdd }: NewRoadmapItemFormProps) => {
           aria-label="Add new roadmap item"
         >
           <Plus className="w-5 h-5" />
-          <span>ADD NEW PROJECT</span>
+          <span>ADD NEW ITEM</span>
         </button>
       ) : (
         <form onSubmit={handleSubmit} className="roadmap-item space-y-4">
@@ -63,7 +63,7 @@ const NewRoadmapItemForm = ({ onAdd }: NewRoadmapItemFormProps) => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              placeholder="Project title"
+              placeholder="Task title"
               className="brutalist-input"
               required
             />
@@ -75,7 +75,7 @@ const NewRoadmapItemForm = ({ onAdd }: NewRoadmapItemFormProps) => {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              placeholder="Project description"
+              placeholder="Task description"
               rows={3}
               className="brutalist-input"
             />
